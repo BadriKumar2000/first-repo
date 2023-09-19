@@ -25,9 +25,9 @@ const userDetailsList = [
 ]
 
 
-const App = ()=><div className="main-container">
+const App = ()=><div className="list-container">
   <h1 className="title">User Profile</h1>
-  <ul className="list-container"> 
+  <ul> 
     {
       userDetailsList.map((eachObject)=><UserProfile userDetails={eachObject}/>)
     }
@@ -35,4 +35,4 @@ const App = ()=><div className="main-container">
   
 </div>
 
-export default App;
+export default App; 
