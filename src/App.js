@@ -32,15 +32,24 @@ const userDetailsList = [
 class App extends Component {
   state = {
     searchInput: "",
+    usersList: userDetailsList,
   };
 
   onChangeSearchInput = (event) => {
     this.setState({ searchInput: event.target.value });
   };
 
+  onDeleteProfile = (id) => {
+    console.log(id);
+    const { usersList } = this.state;
+    const filteredList = usersList.filter((eachItem) => eachItem.id !== id);
+    console.log(filteredList);
+    this.setState({ usersList: filteredList });
+  };
+
   render() {
-    const { searchInput } = this.state;
-    const filteredUserList = userDetailsList.filter((eachObject) => {
+    const { searchInput, usersList } = this.state;
+    const filteredUserList = usersList.filter((eachObject) => {
       const userName = eachObject.name.toLowerCase();
       const input = searchInput.toLowerCase();
       return userName.includes(input);
@@ -54,7 +63,11 @@ class App extends Component {
           onChange={this.onChangeSearchInput}
         />
         {filteredUserList.map((eachObject) => (
-          <UserProfile userDetails={eachObject} key={eachObject.id} />
+          <UserProfile
+            userDetails={eachObject}
+            key={eachObject.id}
+            onDeleteProfile={this.onDeleteProfile}
+          />
         ))}
       </div>
     );
