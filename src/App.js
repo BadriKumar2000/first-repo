@@ -1,3 +1,4 @@
+import { Component } from "react";
 import UserProfile from "./Components/UserProfile";
 import "./App.css";
 
@@ -28,14 +29,36 @@ const userDetailsList = [
   },
 ];
 
-const App = () => (
-  <div className="list-container">
-    <h1 className="title">User Profile</h1>
-    <p>Adding Users Search Box</p>
-    {userDetailsList.map((eachObject) => (
-      <UserProfile userDetails={eachObject} key={eachObject.id} />
-    ))}
-  </div>
-);
+class App extends Component {
+  state = {
+    searchInput: "",
+  };
+
+  onChangeSearchInput = (event) => {
+    this.setState({ searchInput: event.target.value });
+  };
+
+  render() {
+    const { searchInput } = this.state;
+    const filteredUserList = userDetailsList.filter((eachObject) => {
+      const userName = eachObject.name.toLowerCase();
+      const input = searchInput.toLowerCase();
+      return userName.includes(input);
+    });
+    return (
+      <div className="list-container">
+        <h1 className="title">User Profile</h1>
+        <input
+          type="search"
+          className="search-bar"
+          onChange={this.onChangeSearchInput}
+        />
+        {filteredUserList.map((eachObject) => (
+          <UserProfile userDetails={eachObject} key={eachObject.id} />
+        ))}
+      </div>
+    );
+  }
+}
 
 export default App;

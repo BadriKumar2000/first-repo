@@ -6,13 +6,16 @@
 }
 
 .title {
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-size: 32px;
   color: #183b56;
   margin-bottom: 30px;
 }
-.main-container{
+.main-container {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.search-bar {
+  margin-bottom: 10px;
 }
